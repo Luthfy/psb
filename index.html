@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>PSB</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+</head>
+<body>
+
+	<div class="navbar-small1">
+		<div class="container1">
+			<ul class="left1">
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="index.html">ABOUT</a></li>
+				<li><a href="admin/dashboard.php?page=katalogbuku">KATALOG BUKU</a></li>
+			</ul>
+			<ul class="right">
+				<li><a href="http://www.facebook.com/ayolearn"><i class="fa fa-facebook"></i> </a></li>
+				<li><a href="http://www.twitter.com/ayolearn"><i class="fa fa-twitter"></i> </a></li>
+				<li><a href="http://www.plus.google.com/+QizhayaHalimaTusshafna"><i class="fa fa-google-plus"></i> </a></li>
+				<li><a href="http://www.youtube.com/qizhayahalimatusshafna"><i class="fa fa-youtube"></i> </a></li>
+				<!-- <li><a href="callto:"><i class="fa fa-phone"></i> +628 124 848 0907</a></li> -->
+				<li><a href="mailto:qizhayahalimatusshfan@gmail.com"><i class="fa fa-envelope"></i> qizhayahalimatusshafna@gmail.com</a></li>
+			</ul>
+		</div><!-- container1 -->
+	</div><!-- navbar small -->
+
+	<div class="bg-pencarian">
+		<div class="container1">
+			<form class="pencarian" onsubmit="cariBuku()" action="javascript:void(0)" method="get">
+				<h2 align="center">PENCARIAN</h2>
+				<input type="text" placeholder="Masukkan Pencarian" name="katakunci" id="kataKunci">
+				<select name="kategori" id="kategori">
+					<option value="judul">Judul</option>
+					<option value="penulis">Penulis</option>
+				</select>
+				<button type="submit" data-toggle="modal" data-target="#modalCari" onclick="cariBuku()">
+					Cari
+				</button>
+
+				<!-- Modal -->
+
+				<!-- Modal -->
+
+			</form>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalCari" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+	</div>
+
+	<div class="small-footer1">
+		<div class="container1">
+			<p class="copyright">
+				All Right Reserved by Learning Resource Center 2017
+			</p>
+			<p class="link">
+				<a href="#">Top</a>
+			</p>
+		</div><!-- container1 -->
+	</div><!-- small footer -->
+
+	<script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/master.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+/*
+
+	Theme Name: eCommerce;
+	Theme Author: Qizhaya Halima Tusshafna;
+	Author URI: www.line.com/qzhy;
+	Version: 1.0;
+	License: MIT;
+
+*/
+
+/* SETTING FONTS */
+@font-face{
+	font-family: 'Lato-Bold';
+	src: url('../fonts/Lato-Bold.ttf');
+}
+
+@font-face{
+	font-family: 'Lato-Light';
+	src: url('../fonts/Lato-Light.ttf');
+}
+
+@font-face{
+	font-family: 'Lato-Medium';
+	src: url('../fonts/Lato-Medium.ttf');
+}
+
+/* DEFAULT CLASS */
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.container1 {
+	width: 980px;
+	overflow: hidden;
+	margin: auto;
+}
+
+/* BG PENCARIAN */
+.bg-pencarian {
+	height: 570px;
+	background: url('../images/bg-2.jpg') no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+	.bg-pencarian .pencarian {
+		margin: 190px auto;
+		background-color: rgba(183,125,88,0.4);
+		padding: 1px 20px 25px 27px;
+		/*width: 100%;
+		height: 100px;*/
+
+	}
+
+	.bg-pencarian .pencarian input {
+		width: 48%;
+		height: 45px;
+		border-radius: 5px;
+		border: 0;
+		font-family: 'Lato-Medium';
+		padding-left: 20px;
+
+	}
+
+	.bg-pencarian .pencarian select {
+		width: 30%;
+		height: 47px;
+		border-radius: 5px;
+		border: 0;
+		font-family: 'Lato-Medium';
+		padding-left: 20px;
+	}
+
+	.bg-pencarian .pencarian button:hover {
+		background-color: #aec98d;
+	}
+	.bg-pencarian .pencarian button {
+		width: 18%;
+		height: 46px;
+		border-radius: 5px;
+		border: 0;
+		font-family: 'Lato-Medium';
+	}
+
+	.bg-pencarian .pencarian h2 {
+		font-size: 25pt;
+		font-family: 'Lato-Bold';
+		color: white;
+	}
+
+/* SMALL FOOTER */
+
+.small-footer1 {
+	width: 100%;
+	height: 37px;
+	background: #181818;
+}
+
+	.small-footer1 .copyright {
+		float: left;
+		font-family: 'Lato-Medium';
+		color: white;
+	}
+
+	.small-footer1 .link {
+		float: right;
+		font-family: 'Lato-Bold';
+	}
+
+		.small-footer1 .link a {
+			color: white;
+			text-decoration: none;
+		}
+
+/* NAVBAR SMALL */
+
+.navbar-small1 {
+	width: 100%;
+	overflow: hidden;
+	background: #333333;
+	font-family: 'Lato-Medium';
+
+}
+
+	.navbar-small1 .container1 .right {
+		margin: 0;
+		padding: 0;
+		float: right;
+	}
+
+		.navbar-small1 .container1 .right li {
+			float: left;
+			display: block;
+			padding: 10px;
+		}
+
+		.navbar-small1 .container1 .right a {
+			color: white;
+			text-decoration: none;
+			transition : all 1s;
+		}
+
+		.navbar-small1 .container1 .right a:hover {
+			color: #e74c3c;
+		}
+
+	.navbar-small1 .container1 .left1 {
+		margin: 0;
+		padding: 0;
+		float: left;
+	}
+
+		.navbar-small1 .container1 .left1 li {
+			float: left;
+			display: block;
+			padding: 10px;
+		}
+
+		.navbar-small1 .container1 .left1 a {
+			color: white;
+			text-decoration: none;
+			transition : all 1s;
+		}
+
+		.navbar-small1 .container1 .left1 a:hover {
+			color: #e74c3c;
+		}
