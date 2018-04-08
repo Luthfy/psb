@@ -32,6 +32,20 @@ body {
 	margin: 0;
 }
 
+/* TABLE */
+
+.table {
+	width: 100%;
+}
+.row-header {
+	background: rgba(170, 238, 238, 0.5);
+}
+
+	.row-header th {
+		text-align: center;
+		vertical-align: middle;
+	}
+
 /* CONTENT */
 .content {
     height: 84vh;
@@ -175,3 +189,27 @@ body {
             color: #e74c3c;
             transition: 0.5s;
         }
+
+
+/* LOGIN */
+.login {
+	height: 84vh;
+	background-color: lightsalmon;
+}
+
+	.login .form-lg {
+		margin-top: 50px;
+		padding-top: 10px;
+		background-color: lightgreen;
+		border: 3px solid #eee;
+		box-shadow: 10px 10px 1px;
+	}
+	.login .form-lg input {
+		/* font-size: 16pt; */
+		height: 50px;
+	}
+	.login .form-lg .form-header {
+		font-weight: bold;
+		font-family: 'Lato-Medium';
+		text-align: center;
+	}

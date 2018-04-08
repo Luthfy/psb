@@ -1,4 +1,11 @@
 <?php
+    session_start();
+
+    if ($_SESSION['status'] != 'telahLogin') {
+        header('location:index.php');
+        die;
+    }
+
     $koneksi = new mysqli("localhost", "root", "", "psb");
 ?>
 <!DOCTYPE html>
@@ -6,10 +13,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>PSB</title>
-	<!-- <link rel="stylesheet" type="text/css" href="../assets/css/main.css"> -->
     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../assets/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="assets/css/master.css">
 </head>
 <body>
@@ -34,11 +40,12 @@
             <h2>Navigasi</h2>
             <hr>
             <ul>
-                <a href="?p=masteranggota"><li> Master Data Anggota </li></a>
-                <a href="?p=masterbuku"><li> Master Data Buku </li></a>
-                <a href="?p=masterkategori"><li> Master Data Kategori </li></a>
-                <a href="?p=masterrak"><li> Master Data Rak Buku </li></a>
-                <a href="?p=masterpetugas"><li> Master Data Petugas </li></a>
+                <a href="?p=dashboard"><li><i class="glyphicon glyphicon-home"></i> Dashboard </li></a>
+                <a href="?p=masteranggota"><li><i class="glyphicon glyphicon-user"></i> Master Data Anggota </li></a>
+                <a href="?p=masterbuku"><li><i class="glyphicon glyphicon-book"></i> Master Data Buku </li></a>
+                <a href="?p=masterkategori"><li><i class=" glyphicon glyphicon-tags"></i> Master Data Kategori </li></a>
+                <a href="?p=masterrak"><li><i class="glyphicon glyphicon-folder-open"></i> Master Data Rak Buku </li></a>
+                <a href="?p=masterpetugas"><li><i class="glyphicon glyphicon-user"></i> Master Data Petugas </li></a>
             </ul>
         </div>
         <!-- Navigasi -->
@@ -50,6 +57,12 @@
                     // Dashboard
                     case 'dashboard':
                         echo "<h2>Dashboard</h2><hr>";
+                        break;
+                    case 'logout':
+                        unset($_SESSION['status']);
+                        session_destroy();
+                        header('location:../index.html');
+                        die;
                         break;
                     // anggota
                     case 'masteranggota':
@@ -137,8 +150,8 @@
             <li><a href="mailto:qizhayahalimatusshfan@gmail.com"><i class="fa fa-envelope"></i> qizhayahalimatusshafna@gmail.com</a></li>
         </ul>
     </div>
-	<script type="text/javascript" src="../assets/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../assets/js/master.js"></script>
+	<script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/master.js"></script>
 </body>
 </html>

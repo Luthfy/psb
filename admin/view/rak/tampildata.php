@@ -9,9 +9,10 @@
 <h2>Master Data Rak</h2>
 <hr>
 <div class="table-responsive">
-    <a href="?p=tambahrak">Tambah Rak</a>
-    <table class="table table-hover">
-        <tr>
+    <a class="btn btn-success" href="?p=tambahrak"><i class="glyphicon glyphicon-plus-sign"></i>   Tambah Rak</a>
+    <br><br>
+    <table class="table table-hover table-bordered">
+        <tr class="row-header">
             <th>No</th>
             <th>ID Rak</th>
             <th>Lemari</th>
@@ -20,13 +21,13 @@
         </tr>
         <?php while($r = $query->fetch_array()) : ?>
             <tr>
-                <td><?php echo $i++; ?></td>
+                <td align="center"><?php echo $i++; ?></td>
                 <td><?php echo $r['id_rak']; ?></td>
                 <td><?php echo $r['lemari_rak']; ?></td>
                 <td><?php echo $r['posisi_rak']; ?></td>
                 <td>
-                    <a href="?p=ubahrak&id=<?php echo $r['id_rak']; ?>">Ubah</a>
-                    <a href="?p=hapusrak&id=<?php echo $r['id_rak']; ?>" onClick="return confirm('Anda Yakin?');">Hapus</a>
+                    <a class="btn btn-primary" href="?p=ubahrak&id=<?php echo $r['id_rak']; ?>"><i class="glyphicon glyphicon-edit"></i>  Ubah</a>
+                    <a class="btn btn-danger" href="?p=hapusrak&id=<?php echo $r['id_rak']; ?>" onClick="return confirm('Anda Yakin?');"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
                 </td>
             </tr>
         <?php endwhile; ?>
