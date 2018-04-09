@@ -32,6 +32,35 @@ body {
 	margin: 0;
 }
 
+/* Dashboard */
+.kotak {
+	height: 180px;
+	width: 100%;
+}
+
+.totalAnggota {
+	background-color: lightsalmon;
+	padding: 10px 10px;
+	border: 3px solid darksalmon;
+}
+
+.totalBuku {
+	background-color: lightblue;
+	padding: 10px 10px;
+	border: 3px solid lightgreen;
+}
+
+.judulDashboard {
+	font-weight: bold;
+	display: inline;
+}
+
+.content-right{
+	display: inline;
+	float: right;
+	font-size: 18pt;
+}
+
 /* TABLE */
 
 .table {

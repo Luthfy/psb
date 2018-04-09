@@ -56,7 +56,7 @@
                 switch ($_GET['p']) {
                     // Dashboard
                     case 'dashboard':
-                        echo "<h2>Dashboard</h2><hr>";
+                        include 'view/dashboard.php';
                         break;
                     case 'logout':
                         unset($_SESSION['status']);
