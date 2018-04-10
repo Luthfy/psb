@@ -10,7 +10,7 @@
             $i = 1;
         ?>
 
-        <h4 class="judulDashboard">Total Buku</h4>
+        <h4 class="judulDashboard">Total Anggota</h4>
         <div class="content-right">
             <strong><?php echo $q->num_rows; ?> Orang </strong>
         </div>

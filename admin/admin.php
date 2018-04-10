@@ -21,7 +21,7 @@
 <body>
     <div class="navbar navbar-small">
         <div class="left">
-            <h3 class="PSBbrand"><strong>Pusat Sumber Belajar</strong></h3>
+            <h3 class="PSBbrand"><strong>Pusat Sumber Belajar</strong> <sup class="btn-danger">Beta</sup></h3>
         </div>
         <div class="right">
             <ul class="navigasi">

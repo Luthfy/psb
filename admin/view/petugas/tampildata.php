@@ -32,8 +32,8 @@
                 <td><?php echo $r['username']; ?></td>
                 <td><?php echo "**********"; ?></td>
                 <td>
-                    <a class="btn btn-primary" href="?p=ubahpetugas&id=<?php echo $r['id_petugas']; ?>"><i class="glyphicon glyphicon-edit"></i>  Ubah</a>
-                    <a class="btn btn-danger" href="?p=hapuspetugas&id=<?php echo $r['id_petugas']; ?>" onClick="return confirm('Anda Yakin?');"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
+                    <a class="btn btn-primary btn-sm" href="?p=ubahpetugas&id=<?php echo $r['id_petugas']; ?>"><i class="glyphicon glyphicon-edit"></i>  Ubah</a>
+                    <a class="btn btn-danger btn-sm" href="?p=hapuspetugas&id=<?php echo $r['id_petugas']; ?>" onClick="return confirm('Anda Yakin?');"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
                 </td>
             </tr>
         <?php endwhile; ?>

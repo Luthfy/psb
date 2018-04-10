@@ -26,8 +26,8 @@
                 <td><?php echo $r['lemari_rak']; ?></td>
                 <td><?php echo $r['posisi_rak']; ?></td>
                 <td>
-                    <a class="btn btn-primary" href="?p=ubahrak&id=<?php echo $r['id_rak']; ?>"><i class="glyphicon glyphicon-edit"></i>  Ubah</a>
-                    <a class="btn btn-danger" href="?p=hapusrak&id=<?php echo $r['id_rak']; ?>" onClick="return confirm('Anda Yakin?');"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
+                    <a class="btn btn-primary btn-sm" href="?p=ubahrak&id=<?php echo $r['id_rak']; ?>"><i class="glyphicon glyphicon-edit"></i>  Ubah</a>
+                    <a class="btn btn-danger btn-sm" href="?p=hapusrak&id=<?php echo $r['id_rak']; ?>" onClick="return confirm('Anda Yakin?');"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
                 </td>
             </tr>
         <?php endwhile; ?>

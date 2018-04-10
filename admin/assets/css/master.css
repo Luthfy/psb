@@ -178,6 +178,7 @@ body {
     .navbar-small .right .navigasi li a:hover {
         color: #e74c3c;
         transition: 0.5s;
+		text-decoration: none;
     }
 
 /* SMALL FOOTER */
@@ -229,7 +230,7 @@ body {
 	.login .form-lg {
 		margin-top: 50px;
 		padding-top: 10px;
-		background-color: lightgreen;
+		background-color: lightblue;
 		border: 3px solid #eee;
 		box-shadow: 10px 10px 1px;
 	}
