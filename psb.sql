@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 21, 2018 at 06:12 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Host: localhost
+-- Generation Time: Apr 16, 2018 at 05:05 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `anggota`
+--
+
+CREATE TABLE `anggota` (
+  `id_anggota` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `alamat` text NOT NULL,
+  `angkatan` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `buku`
 --
 
@@ -35,31 +48,33 @@ CREATE TABLE `buku` (
   `id_kat` char(3) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `buku`
---
+-- --------------------------------------------------------
 
-INSERT INTO `buku` (`id_buku`, `judul`, `penulis`, `id_kat`) VALUES
-(1, 'Analisis Data Kuantitatif', 'Matthew dan Michael', 'K'),
-(2, 'Analisis Data Kuantitatif', 'Matthew dan Michael', 'K'),
-(3, 'Computer Graphic Design', 'Hendi Hendratman', 'D'),
-(4, 'Computer Graphic Design', 'Hendi Hendratman', 'D'),
-(5, 'PENGANTAR KURIKULUM', 'Tidak Diketahui', 'K'),
-(6, 'DESAIN KOMUNIKASI VISUAL', 'Tidak Diketahui ', 'D');
+--
+-- Stand-in structure for view `DetailBuku`
+-- (See below for the actual view)
+--
+CREATE TABLE `DetailBuku` (
+`judulbuku` varchar(255)
+,`Total Buku` bigint(21)
+,`Buku Yang dipinjam` bigint(21)
+,`Sisa Buku` bigint(22)
+);
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `katalogbuku`
+-- Stand-in structure for view `KatalogBuku`
 -- (See below for the actual view)
 --
-CREATE TABLE `katalogbuku` (
+CREATE TABLE `KatalogBuku` (
 `No` int(11)
 ,`judul` varchar(255)
 ,`penulis` varchar(255)
+,`id_kat` char(3)
 ,`kategori` varchar(100)
-,`Kode Rak` char(3)
-,`Posisi Buku` varchar(255)
+,`Kode_Rak` char(3)
+,`Posisi_Buku` varchar(255)
 );
 
 -- --------------------------------------------------------
@@ -74,13 +89,54 @@ CREATE TABLE `kategori` (
   `id_rak` char(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `kategori`
+-- Table structure for table `peminjaman`
 --
 
-INSERT INTO `kategori` (`id_kat`, `keterangan`, `id_rak`) VALUES
-('D', 'Desain', 'A1'),
-('K', 'Kependidikan', 'A2');
+CREATE TABLE `peminjaman` (
+  `id_peminjaman` int(11) NOT NULL,
+  `id_anggota` int(11) NOT NULL,
+  `id_buku` int(11) NOT NULL,
+  `tanggal_pinjam` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `peminjamanBuku`
+-- (See below for the actual view)
+--
+CREATE TABLE `peminjamanBuku` (
+`id_peminjaman` int(11)
+,`tanggal_pinjam` datetime
+,`idBuku` int(11)
+,`nama` varchar(255)
+,`judul` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `petugas`
+--
+
+CREATE TABLE `petugas` (
+  `id_petugas` int(11) NOT NULL,
+  `nama_petugas` varchar(30) NOT NULL,
+  `jabatan_petugas` varchar(30) NOT NULL,
+  `AccessLevel` int(2) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `petugas`
+--
+
+INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `jabatan_petugas`, `AccessLevel`, `username`, `password`) VALUES
+(1, 'Administrator', 'Pengembang IT', 0, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -90,52 +146,46 @@ INSERT INTO `kategori` (`id_kat`, `keterangan`, `id_rak`) VALUES
 
 CREATE TABLE `rak` (
   `id_rak` char(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lemari_rak` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
   `posisi_rak` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `rak`
---
+-- --------------------------------------------------------
 
-INSERT INTO `rak` (`id_rak`, `posisi_rak`) VALUES
-('A1', 'Lemari A Rak Nomor 1'),
-('A2', 'Lemari A Rak Nomor 2'),
-('A3', 'Lemari A Rak Nomor 3'),
-('A4', 'Lemari A Rak Nomor 4'),
-('A5', 'Lemari A Rak Nomor 5');
+--
+-- Structure for view `DetailBuku`
+--
+DROP TABLE IF EXISTS `DetailBuku`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `DetailBuku`  AS  select distinct `buku`.`judul` AS `judulbuku`,(select count(`buku`.`judul`) from `buku` where (`buku`.`judul` = `judulbuku`)) AS `Total Buku`,(select count(`peminjamanBuku`.`judul`) from `peminjamanBuku` where (`peminjamanBuku`.`judul` = `judulbuku`)) AS `Buku Yang dipinjam`,((select count(`buku`.`judul`) from `buku` where (`buku`.`judul` = `judulbuku`)) - (select count(`peminjamanBuku`.`judul`) from `peminjamanBuku` where (`peminjamanBuku`.`judul` = `judulbuku`))) AS `Sisa Buku` from `buku` ;
 
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `totalbuku`
--- (See below for the actual view)
+-- Structure for view `KatalogBuku`
 --
-CREATE TABLE `totalbuku` (
-`judulbuku` varchar(255)
-,`Total Buku` bigint(21)
-);
+DROP TABLE IF EXISTS `KatalogBuku`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `KatalogBuku`  AS  select `bk`.`id_buku` AS `No`,`bk`.`judul` AS `judul`,`bk`.`penulis` AS `penulis`,`bk`.`id_kat` AS `id_kat`,`k`.`keterangan` AS `kategori`,`r`.`id_rak` AS `Kode_Rak`,`r`.`posisi_rak` AS `Posisi_Buku` from ((`buku` `bk` left join `kategori` `k` on((`bk`.`id_kat` = `k`.`id_kat`))) left join `rak` `r` on((`k`.`id_rak` = `r`.`id_rak`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `katalogbuku`
+-- Structure for view `peminjamanBuku`
 --
-DROP TABLE IF EXISTS `katalogbuku`;
+DROP TABLE IF EXISTS `peminjamanBuku`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `katalogbuku`  AS  select `bk`.`id_buku` AS `No`,`bk`.`judul` AS `judul`,`bk`.`penulis` AS `penulis`,`k`.`keterangan` AS `kategori`,`r`.`id_rak` AS `Kode Rak`,`r`.`posisi_rak` AS `Posisi Buku` from ((`buku` `bk` left join `kategori` `k` on((`bk`.`id_kat` = `k`.`id_kat`))) left join `rak` `r` on((`k`.`id_rak` = `r`.`id_rak`))) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `totalbuku`
---
-DROP TABLE IF EXISTS `totalbuku`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `totalbuku`  AS  select distinct `buku`.`judul` AS `judulbuku`,(select count(`buku`.`judul`) from `buku` where (`buku`.`judul` = `judulbuku`)) AS `Total Buku` from `buku` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `peminjamanBuku`  AS  select `p`.`id_peminjaman` AS `id_peminjaman`,`p`.`tanggal_pinjam` AS `tanggal_pinjam`,`p`.`id_buku` AS `idBuku`,`a`.`nama` AS `nama`,`b`.`judul` AS `judul` from ((`peminjaman` `p` left join `anggota` `a` on((`p`.`id_anggota` = `a`.`id_anggota`))) left join `buku` `b` on((`p`.`id_buku` = `b`.`id_buku`))) ;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `anggota`
+--
+ALTER TABLE `anggota`
+  ADD PRIMARY KEY (`id_anggota`);
 
 --
 -- Indexes for table `buku`
@@ -152,6 +202,18 @@ ALTER TABLE `kategori`
   ADD KEY `id_rak` (`id_rak`);
 
 --
+-- Indexes for table `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  ADD PRIMARY KEY (`id_peminjaman`);
+
+--
+-- Indexes for table `petugas`
+--
+ALTER TABLE `petugas`
+  ADD PRIMARY KEY (`id_petugas`);
+
+--
 -- Indexes for table `rak`
 --
 ALTER TABLE `rak`
@@ -162,10 +224,28 @@ ALTER TABLE `rak`
 --
 
 --
+-- AUTO_INCREMENT for table `anggota`
+--
+ALTER TABLE `anggota`
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `buku`
 --
 ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `petugas`
+--
+ALTER TABLE `petugas`
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
